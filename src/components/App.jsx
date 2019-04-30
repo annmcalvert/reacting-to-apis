@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DisplayMovie from './DisplayMovie';
+// import 'isomorphic-fetch';
+// import 'es6-promises';
 
 class App extends Component {
     constructor(props) {
@@ -8,24 +10,35 @@ class App extends Component {
             movies: [
                 {
                     title: 'Movie 1',
-                    year: '1986'
+                    description: '1986'
                 },
                 {
                     title: 'Movie 2',
-                    year: '2014'
+                    description: '2014'
                 }
             ]
         };
     }
 
-render() {
-    return (
-        <div className="container">
-            <h1>Movies</h1>
-            {this.state.movies.map(movie => <DisplayMovie movie={movie} />)}
-        </div>
-    )
-}
+    componentDidMount() {
+        fetch("https://ghibliapi.herokuapp.com/films")
+            .then(res => res.json())
+            .then(obj => {
+                this.setState({
+                    movies: obj
+                })
+            })
+        // .then(obj => {console.log(obj)} )
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <h1>Movies</h1>
+                {this.state.movies.map(movie => <DisplayMovie movie={movie} />)}
+            </div>
+        )
+    }
 
 }
 
