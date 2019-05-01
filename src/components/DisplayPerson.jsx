@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DisplayPeople = (props) => {
+const DisplayPerson = (props) => {
    
 
    
@@ -18,4 +18,4 @@ const DisplayPeople = (props) => {
        
 }
 
-export default DisplayPeople;
+export default DisplayPerson;

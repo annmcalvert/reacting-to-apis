@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DisplayMovie from './DisplayMovie';
-import DisplayPeople from './DisplayPeople';
+import DisplayPerson from './DisplayPerson';
+import { isFlowBaseAnnotation } from '@babel/types';
 // import ShowList from './ShowList';
 // import 'isomorphic-fetch';
 // import 'es6-promises';
@@ -11,7 +12,8 @@ class App extends Component {
         this.state = {
             movies: [],
             people: [],
-            isMovieListVisible: false
+            isMovieListVisible: false,
+            isPeopleListVisible: false
         };
     }
 
@@ -30,10 +32,25 @@ class App extends Component {
                 })
     }
 
+    // handleClick = () => {
+    //     this.setState({
+    //         isMovieListVisible: !this.state.isMovieListVisible
 
+    //     })
+    // }
 
-    handleClick = () => {
-        this.setState({ isMovieListVisible: !this.state.isMovieListVisible })
+    handleClickMovies = () => {
+        this.setState({
+            isMovieListVisible: !this.state.isMovieListVisible,
+            isPeopleListVisible: false
+        })
+    }
+
+    handleClickPeople = () => {
+        this.setState({
+            isPeopleListVisible: !this.state.isPeopleListVisible,
+            isMovieListVisible: false
+        })
     }
 
     render() {
@@ -41,6 +58,29 @@ class App extends Component {
             <div className="container">
                 <h1>Movies</h1>
                 <button
+                    className="btn btn-primary"
+                    onClick={this.handleClickMovies}
+                >
+                    Load Films
+                </button>
+                <button
+                    className="btn btn-primary"
+                    onClick={this.handleClickPeople}
+                >
+                    Load People
+                    </button>
+
+                {/* {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)} */}
+
+                {this.state.isMovieListVisible &&
+                    this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
+                }
+
+                {this.state.isPeopleListVisible &&
+                    this.state.people.map(person => <DisplayPerson key={person.id} person={person} />)
+                }
+
+                {/* <button
                     className="btn btn-primary"
                     onClick={this.handleClick}
                 >
@@ -50,13 +90,14 @@ class App extends Component {
                     className="btn btn-primary"
                     onClick={this.handleClick}
                 >
-                    Load people
-                    </button>
-                {/* {
-                    this.state.isMovieListVisible */}
-                {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)}
-                {/* : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
+                    Load People
+                    </button> */}
+
+                {/* {this.state.isMovieListVisible
+                    ? this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
+                    : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
                 } */}
+
             </div >
         )
     }
