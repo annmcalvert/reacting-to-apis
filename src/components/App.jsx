@@ -20,10 +20,14 @@ class App extends Component {
             .then(res => res.json())
             .then(
                 (movies) => {
-                this.setState({ movies: movies });
-                });
-            // .then(obj => console.log(obj));
-
+                    this.setState({ movies: movies });
+                    return fetch("https://ghibliapi.herokuapp.com/people");
+                })
+            .then(res => res.json())
+            .then(
+                (people) => {
+                    this.setState({ people: people });
+                })
     }
 
 
@@ -50,8 +54,8 @@ class App extends Component {
                     </button>
                 {/* {
                     this.state.isMovieListVisible */}
-                        {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)}
-                        {/* : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
+                {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)}
+                {/* : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
                 } */}
             </div >
         )
