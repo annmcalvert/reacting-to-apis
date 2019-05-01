@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import DisplayMovie from './DisplayMovie';
 import DisplayPerson from './DisplayPerson';
-import { isFlowBaseAnnotation } from '@babel/types';
-// import ShowList from './ShowList';
+import logo from './logo.png';
 // import 'isomorphic-fetch';
 // import 'es6-promises';
 
@@ -56,15 +55,16 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Movies</h1>
+                <img src={logo}></img>
+                <br></br>
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary m-5"
                     onClick={this.handleClickMovies}
                 >
                     Load Films
                 </button>
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary m-5"
                     onClick={this.handleClickPeople}
                 >
                     Load People
@@ -97,11 +97,9 @@ class App extends Component {
                     ? this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
                     : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
                 } */}
-
             </div >
         )
     }
-
 }
 
 export default App;
