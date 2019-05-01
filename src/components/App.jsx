@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DisplayMovie from './DisplayMovie';
+import DisplayPeople from './DisplayPeople';
 // import ShowList from './ShowList';
 // import 'isomorphic-fetch';
 // import 'es6-promises';
@@ -9,6 +10,7 @@ class App extends Component {
         super(props);
         this.state = {
             movies: [],
+            people: [],
             isMovieListVisible: false
         };
     }
@@ -16,12 +18,15 @@ class App extends Component {
     componentDidMount() {
         fetch("https://ghibliapi.herokuapp.com/films")
             .then(res => res.json())
-            .then(movies => {
-                this.setState({
-                    movies: movies
-                })
-            })
+            .then(
+                (movies) => {
+                this.setState({ movies: movies });
+                });
+            // .then(obj => console.log(obj));
+
     }
+
+
 
     handleClick = () => {
         this.setState({ isMovieListVisible: !this.state.isMovieListVisible })
@@ -35,13 +40,20 @@ class App extends Component {
                     className="btn btn-primary"
                     onClick={this.handleClick}
                 >
-                    Click Me
-            </button>
-                {
-                    this.state.isMovieListVisible &&
-                    this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
-                }
-            </div>
+                    Load Films
+                </button>
+                <button
+                    className="btn btn-primary"
+                    onClick={this.handleClick}
+                >
+                    Load people
+                    </button>
+                {/* {
+                    this.state.isMovieListVisible */}
+                        {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)}
+                        {/* : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
+                } */}
+            </div >
         )
     }
 
