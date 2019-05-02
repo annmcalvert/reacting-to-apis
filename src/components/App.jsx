@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DisplayMovie from './DisplayMovie';
+import DisplayFilm from './DisplayFilm';
 import DisplayPerson from './DisplayPerson';
 import logo from './logo.png';
 // import 'isomorphic-fetch';
@@ -9,9 +9,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movies: [],
+            films: [],
             people: [],
-            isMovieListVisible: false,
+            isFilmListVisible: false,
             isPeopleListVisible: false
         };
     }
@@ -20,8 +20,8 @@ class App extends Component {
         fetch("https://ghibliapi.herokuapp.com/films")
             .then(res => res.json())
             .then(
-                (movies) => {
-                    this.setState({ movies: movies });
+                (films) => {
+                    this.setState({ films: films });
                     return fetch("https://ghibliapi.herokuapp.com/people");
                 })
             .then(res => res.json())
@@ -33,14 +33,14 @@ class App extends Component {
 
     // handleClick = () => {
     //     this.setState({
-    //         isMovieListVisible: !this.state.isMovieListVisible
+    //         isFilmListVisible: !this.state.isFilmListVisible
 
     //     })
     // }
 
-    handleClickMovies = () => {
+    handleClickfilms = () => {
         this.setState({
-            isMovieListVisible: !this.state.isMovieListVisible,
+            isFilmListVisible: !this.state.isFilmListVisible,
             isPeopleListVisible: false
         })
     }
@@ -48,7 +48,7 @@ class App extends Component {
     handleClickPeople = () => {
         this.setState({
             isPeopleListVisible: !this.state.isPeopleListVisible,
-            isMovieListVisible: false
+            isFilmListVisible: false
         })
     }
 
@@ -59,9 +59,9 @@ class App extends Component {
                 <br></br>
                 <button
                     className="btn btn-primary m-5"
-                    onClick={this.handleClickMovies}
+                    onClick={this.handleClickfilms}
                 >
-                    {this.state.isMovieListVisible ? "Hide Films" : "Show Films"}
+                    {this.state.isFilmListVisible ? "Hide Films" : "Show Films"}
                 </button>
                 <button
                     className="btn btn-primary m-5"
@@ -70,10 +70,10 @@ class App extends Component {
                     {this.state.isPeopleListVisible ? "Hide People" : "Show People"}
                     </button>
 
-                {/* {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)} */}
+                {/* {this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)} */}
 
-                {this.state.isMovieListVisible &&
-                    this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
+                {this.state.isFilmListVisible &&
+                    this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)
                 }
 
                 {this.state.isPeopleListVisible &&
@@ -93,8 +93,8 @@ class App extends Component {
                     Load People
                     </button> */}
 
-                {/* {this.state.isMovieListVisible
-                    ? this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)
+                {/* {this.state.isFilmListVisible
+                    ? this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)
                     : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
                 } */}
             </div >
