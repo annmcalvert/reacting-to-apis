@@ -31,13 +31,6 @@ class App extends Component {
                 })
     }
 
-    // handleClick = () => {
-    //     this.setState({
-    //         isFilmListVisible: !this.state.isFilmListVisible
-
-    //     })
-    // }
-
     handleClickfilms = () => {
         this.setState({
             isFilmListVisible: !this.state.isFilmListVisible,
@@ -55,7 +48,7 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <img src={logo}></img>
+                <img src={logo} alt="logo"></img>
                 <br></br>
                 <button
                     className="btn btn-primary m-5"
@@ -68,35 +61,13 @@ class App extends Component {
                     onClick={this.handleClickPeople}
                 >
                     {this.state.isPeopleListVisible ? "Hide People" : "Show People"}
-                    </button>
-
-                {/* {this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)} */}
-
+                </button>
                 {this.state.isFilmListVisible &&
                     this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)
                 }
-
                 {this.state.isPeopleListVisible &&
                     this.state.people.map(person => <DisplayPerson key={person.id} person={person} />)
                 }
-
-                {/* <button
-                    className="btn btn-primary"
-                    onClick={this.handleClick}
-                >
-                    Load Films
-                </button>
-                <button
-                    className="btn btn-primary"
-                    onClick={this.handleClick}
-                >
-                    Load People
-                    </button> */}
-
-                {/* {this.state.isFilmListVisible
-                    ? this.state.films.map(film => <DisplayFilm key={film.id} film={film} />)
-                    : this.state.people.map(person => <DisplayPeople key={person.id} person={person} />)
-                } */}
             </div >
         )
     }
