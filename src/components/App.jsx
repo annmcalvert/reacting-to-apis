@@ -61,13 +61,13 @@ class App extends Component {
                     className="btn btn-primary m-5"
                     onClick={this.handleClickMovies}
                 >
-                    Load Films
+                    {this.state.isMovieListVisible ? "Hide Films" : "Show Films"}
                 </button>
                 <button
                     className="btn btn-primary m-5"
                     onClick={this.handleClickPeople}
                 >
-                    Load People
+                    {this.state.isPeopleListVisible ? "Hide People" : "Show People"}
                     </button>
 
                 {/* {this.state.movies.map(movie => <DisplayMovie key={movie.id} movie={movie} />)} */}
