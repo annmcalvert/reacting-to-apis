@@ -16,20 +16,32 @@ class App extends Component {
         };
     }
 
-    componentDidMount() {
-        fetch("https://ghibliapi.herokuapp.com/films")
-            .then(res => res.json())
-            .then(
-                (films) => {
-                    this.setState({ films: films });
-                    return fetch("https://ghibliapi.herokuapp.com/people");
-                })
-            .then(res => res.json())
-            .then(
-                (people) => {
-                    this.setState({ people: people });
-                })
+    async componentDidMount() {
+        try {
+            let rFilms = await fetch("https://ghibliapi.herokuapp.com/films");
+            let films = await rFilms.json();
+            let rPeople = await fetch("https://ghibliapi.herokuapp.com/people");
+            let people = await rPeople.json();
+            this.setState({ films, people });
+        } catch (error) {
+            console.log(error);
+        }
     }
+
+    // componentDidMount() {
+    //     fetch("https://ghibliapi.herokuapp.com/films")
+    //         .then(res => res.json())
+    //         .then(
+    //             (films) => {
+    //                 this.setState({ films });
+    //                 return fetch("https://ghibliapi.herokuapp.com/people");
+    //             })
+    //         .then(res => res.json())
+    //         .then(
+    //             (people) => {
+    //                 this.setState({ people });
+    //             })
+    // }
 
     handleClickfilms = () => {
         this.setState({
